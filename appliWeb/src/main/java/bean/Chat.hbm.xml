@@ -5,8 +5,8 @@
 
 
 <hibernate-mapping>
-	<class name="bean.Chat" table="appli_web">
-		<id name="idChat" column="idChat">
+	<class name="bean.Chat" table="chats">
+		<id name="idChat" column="id_Chat">
 		<generator class="native"></generator>
 		</id>
 		

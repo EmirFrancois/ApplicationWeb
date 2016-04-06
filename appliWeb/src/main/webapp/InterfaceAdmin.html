@@ -1,15 +1,19 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app="single-page-app">
 
   <head>
     <meta charset="utf-8">
 
    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="./js/controller/AdminController.js"></script>
+<!--     <script src="./js/main.js"></script> -->
+    <script src="https://code.angularjs.org/1.4.5/angular-route.min.js"></script>
 
   </head>
 
   <body>
-    <div class="container">
+    <div ng-controller="AdminCtrlr" class="container">
       <header class="row col-md-12">
         <div class="page-header">
           <h1><font color="#2540BA">Neko Atsume</font><small> aide</small><span class="glyphicon glyphicon-phone"></span></h1>
@@ -22,7 +26,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Rechercher">
+                                    <input type="text" data-ng-model="chercherChat" class="form-control" placeholder="Rechercher">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default"  type="button"><span class="glyphicon glyphicon-search"></span></button>
                                     </span>
@@ -63,306 +67,18 @@
 
  
 </tr>
-<tr>
-<td><img src="images\cats\regular cats/Snowball.png" width="32" height="32"></td>
-<td>snowball</td>
-<td>しろねこさん</td>
-<td>Solid White</td>
-<td>80</td>
+<tr data-ng-repeat="chat in listeChats | filter:chercherChat">
+<td><img src="images\cats\regular cats{{chat.image}}" width="32" height="32"></td>
+<td>{{chat.nomFrancais}}</td>
+<td>{{chat.nomJaponnais}}</td>
+<td>{{chat.description}}</td>
+<td>{{chat.niveau}}</td>
 <td><img src="images\cats\regular cats\momentos/Memento_snowball.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+ <td><button data-ng-click="modifier(chat.ididChat)" type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
+  <td><button data-ng-click="supprimer(chat.idChat)" type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
 </tr>
-<tr>
-<td><img src="images\cats\regular cats/Smokey.png" width="32" height="32"></td>
-<td>Smokey</td>
-<td>くろねこさん</td>
-<td>solid black</td>
-<td>140</td>
-<td><img src="images\cats\regular cats\momentos/Memento_Smokey.png" width="32" height="32"></td>
-<td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-<td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/spots.png" width="32" height="32"></td>
-<td>spots</td>
-<td>しろくろさん</td>
-<td>Black & White</td>
-<td>75</td>
-<td><img src="images\cats\regular cats\momentos/Memento_spots.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/Shadow.png" width="32" height="32"></td>
-<td>Shadow</td>
-<td>はいいろさん</td>
-<td>solid grey</td>
-<td>50</td>
-<td><img src="images\cats\regular cats\momentos/Memento_Shadow.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/Sunny.png" width="32" height="32"></td>
-<td>Sunny</td>
-<td>とびみけさん</td>
-<td>Turkish Calico</td>
-<td>120</td>
-<td><img src="images\cats\regular cats\momentos/Memento_Sunny.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/fred.png" width="32" height="32"></td>
-<td>fred</td>
-<td>ちゃとらさん</td>
-<td>orange tabby</td>
-<td>150</td>
-<td><img src="images\cats\regular cats\momentos/Memento_fred.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/pumpkin.png" width="32" height="32"></td>
-<td>pumpkin</td>
-<td>しろちゃとらさん</td>
-<td>orange & white tabby</td>
-<td>90</td>
-<td><img src="images\cats\regular cats\momentos/Memento_pumpkin.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/callie.png" width="32" height="32"></td>
-<td>callie</td>
-<td>みけさん</td>
-<td>calico</td>
-<td>50</td>
-<td><img src="images\cats\regular cats\momentos/Memento_callie.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/tabitha.png" width="32" height="32"></td>
-<td>tabitha</td>
-<td>しまみけさん</td>
-<td>calico tabby</td>
-<td>40</td>
-<td><img src="images\cats\regular cats\momentos/Memento_tabitha.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/bandit.png" width="32" height="32"></td>
-<td>bandit</td>
-<td>さびがらさん</td>
-<td>tortoiseshell</td>
-<td>180</td>
-<td><img src="images\cats\regular cats\momentos/Memento_bandit.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/gabriel.png" width="32" height="32"></td>
-<td>gabriel</td>
-<td>はちわれさん</td>
-<td>tuxedo</td>
-<td>150</td>
-<td><img src="images\cats\regular cats\momentos/Memento_gabriel.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/marshmallow.png" width="32" height="32"></td>
-<td>marshmallow</td>
-<td>ぽいんとさん</td>
-<td>pointed</td>
-<td>170</td>
-<td><img src="images\cats\regular cats\momentos/Memento_marshmallow.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/socks.png" width="32" height="32"></td>
-<td>socks</td>
-<td>くつしたさん</td>
-<td>black w/ white mitts</td>
-<td>70</td>
-<td><img src="images\cats\regular cats\momentos/Memento_socks.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/lexy.png" width="32" height="32"></td>
-<td>lexy</td>
-<td>しろねこさん</td>
-<td>grey & white</td>
-<td>100</td>
-<td><img src="images\cats\regular cats\momentos/Memento_lexy.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/bolt.png" width="32" height="32"></td>
-<td>bolt</td>
-<td>きじとらさん</td>
-<td>brown tabby</td>
-<td>140</td>
-<td><img src="images\cats\regular cats\momentos/Memento_bolt.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/breezy.png" width="32" height="32"></td>
-<td>breezy</td>
-<td>しろきじさん</td>
-<td>brown & white tabby</td>
-<td>30</td>
-<td><img src="images\cats\regular cats\momentos/Memento_breezy.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/misty.png" width="32" height="32"></td>
-<td>misty</td>
-<td>さばとらさん</td>
-<td>mackerel tabby</td>
-<td>160</td>
-<td><img src="images\cats\regular cats\momentos/Memento_misty.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/pickles.png" width="32" height="32"></td>
-<td>pickles</td>
-<td>しろさばさん</td>
-<td>gray & white tabby</td>
-<td>0</td>
-<td><img src="images\cats\regular cats\momentos/Memento_pickles.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/pepper.png" width="32" height="32"></td>
-<td>pepper</td>
-<td>しろねこさん</td>
-<td>black w/ odd eyes</td>
-<td>165</td>
-<td><img src="images\cats\regular cats\momentos/Memento_pepper.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/patches.png" width="32" height="32"></td>
-<td>patches</td>
-<td>ぶちさん</td>
-<td>orange patches</td>
-<td>80</td>
-<td><img src="images\cats\regular cats\momentos/Memento_patches.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/gozer.png" width="32" height="32"></td>
-<td>gozer</td>
-<td>しろねこさん</td>
-<td>Solid White</td>
-<td>80</td>
-<td><img src="images\cats\regular cats\momentos/Memento_gozer.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/cocoa.png" width="32" height="32"></td>
-<td>cocoa</td>
-<td>ちゃはちさん</td>
-<td>brown tuxedo</td>
-<td>45</td>
-<td><img src="images\cats\regular cats\momentos/Memento_cocoa.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/princess.png" width="32" height="32"></td>
-<td>princess</td>
-<td>むぎわらさん</td>
-<td>striped torbie</td>
-<td>125</td>
-<td><img src="images\cats\regular cats\momentos/Memento_princess.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/ginger.png" width="32" height="32"></td>
-<td>ginger</td>
-<td>あかげさん</td>
-<td>red w/ white mitts</td>
-<td>60</td>
-<td><img src="images\cats\regular cats\momentos/Memento_ginger.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/peaches.png" width="32" height="32"></td>
-<td>peaches</td>
-<td>くりーむさん</td>
-<td>tan & orange</td>
-<td>45</td>
-<td><img src="images\cats\regular cats\momentos/Memento_peaches.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/spud.png" width="32" height="32"></td>
-<td>spud</td>
-<td>あかさびさん</td>
-<td>red tortoiseshell</td>
-<td>80</td>
-<td><img src="images\cats\regular cats\momentos/Memento_spud.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/mack.png" width="32" height="32"></td>
-<td>mack</td>
-<td>しろとらさん</td>
-<td>white mackerel</td>
-<td>130</td>
-<td><img src="images\cats\regular cats\momentos/Memento_mack.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/speckles.png" width="32" height="32"></td>
-<td>speckles</td>
-<td>くろぶちさん</td>
-<td>black patches</td>
-<td>40</td>
-<td><img src="images\cats\regular cats\momentos/Memento_speckles.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/willie.png" width="32" height="32"></td>
-<td>willie</td>
-<td>くろとらさん</td>
-<td>black tabby</td>
-<td>75</td>
-<td><img src="images\cats\regular cats\momentos/Memento_willie.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
-<tr>
-<td><img src="images\cats\regular cats/rascal.png" width="32" height="32"></td>
-<td>rascal</td>
-<td>はいはちさん</td>
-<td>grey tuxedo</td>
-<td>140</td>
-<td><img src="images\cats\regular cats\momentos/Memento_rascal.png" width="32" height="32"></td>
- <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-pencil"></span></button></td>
-  <td><button type="button" class="btn btn-primary" id="fetch-button"><span class="glyphicon glyphicon-trash"></span></button></td>
-</tr>
+
+
 </table>
             </div>
           </div>
